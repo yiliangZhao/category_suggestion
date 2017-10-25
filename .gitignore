@@ -1,3 +1,13 @@
+# project specifics
+fastText/
+
+# for deep learning models
+models/
+
+# for tokenization
+conf/
+data/
+textproc/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
