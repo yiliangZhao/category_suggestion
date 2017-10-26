@@ -100,12 +100,16 @@ def predict_label(text_strings, vocab, max_len, model):
     return hh
 
 
-def predict(title, desc):
+def predict(itemid, title, desc):
     # print "predict:",  title
     # title_and_desc = title + " " + desc
     title_and_desc = title
     clean_text_strings = [clean_text(title_and_desc)]
     
+    if len(clean_text_strings[0]) < 1:
+        print ('itemid: %d, name_description: %s'% (itemid, title_and_desc))
+        print ('###' + clean_text_strings[0] + '###')
+        return []
     # level 1 prediction
     level_1_preds = fasttext_model.predict_proba([title_and_desc], k=3)
     level_1_preds = [(int(label.replace('__label__','')), prob) for label, prob in level_1_preds[0]]
