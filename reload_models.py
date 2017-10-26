@@ -15,4 +15,3 @@ if __name__ == '__main__':
     time.sleep(10)
     subprocess.call(['/data/category_suggestion/deployl.sh'])
     """
-    
