@@ -24,12 +24,8 @@ def hello_world():
 @app.route('/category/v1.1/item', methods=['GET'])
 def get_items():
     start_time = time.time()
-    itemname = tokenization(request.args.get('itemname'))
-    if 'itemdesc' in request.args:
-        itemdesc = tokenization(request.args.get('itemdesc'))
-    else:
-        itemdesc = ""
-    results = predict(itemname, itemdesc)
+    itemname = tokenization(request.args.get('title'))
+    results = predict(itemname, '')
     status = 200
     return jsonify(results), status
 
@@ -66,4 +62,4 @@ def post_items():
     # return json.dumps(result, ensure_ascii=False, default=default), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, threaded=True)
+    app.run(host='0.0.0.0', port=32143, threaded=True)
