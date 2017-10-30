@@ -22,18 +22,20 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 df_cat = pd.read_csv(CAT_MAPPING_PATH)
 
 
-def intop2(y_tue, y_pred):
+def in_top2(y_tue, y_pred):
     return top_k_categorical_accuracy(y_tue, y_pred, k=2)
 
-def intop3(y_tue, y_pred):
+
+def in_top3(y_tue, y_pred):
     return top_k_categorical_accuracy(y_tue, y_pred, k=3)
+
 
 def load_cnn_model(cat_id):
     directory = os.path.join(CNN_MODEL_PATH, '%d_files' % cat_id)
     with open(os.path.join(directory, "config_%d.p" %cat_id), 'rb') as fp:
         d1 = pickle.load(fp)
     embedding_dim, max_len, vocab, inv_dict = d1[0], d1[1], d1[2], d1[3]
-    model = load_model(os.path.join(directory, '%d_model.h5' %cat_id), custom_objects={'inTop3': intop3, 'inTop2': intop2})
+    model = load_model(os.path.join(directory, '%d_model.h5' %cat_id), custom_objects={'in_top3': in_top3, 'in_top2': in_top2})
     model._make_predict_function()  # have to initialize before threading
     return (max_len, vocab, inv_dict, model)
 
