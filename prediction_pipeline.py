@@ -50,12 +50,27 @@ for cat_id in cat_ids:
 
 
 def clean_text(doc):
+    """
+    Keep all words that are before "請"
+    :param doc: title and description
+    :type: str
+    :return: str
+    """
+    index = doc.find(u"請")
+    if index == -1:
+        return doc
+    if index == 0:
+        return doc[index + 1:]
+    return doc[:index]
+
+"""
+def clean_text(doc):
     word_list = doc.split()
     if "請" in word_list:
         idx = word_list.index("請")
         word_list = word_list[:idx]
     return ' '.join(word_list)
-
+"""
 
 def build_input_data(sentences, vocabulary):
     """
