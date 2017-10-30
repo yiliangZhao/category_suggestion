@@ -3,8 +3,10 @@ import time
 
 if __name__ == '__main__':
     ps = subprocess.Popen(('ps', 'aux'), stdout=subprocess.PIPE)
-    output = subprocess.check_output(('grep', 'gunicorn: master'), stdin=ps.stdout)   
+    grep = subprocess.Popen(('grep', 'gunicorn'), stdin=ps.stdout, stdout=subprocess.PIPE)
+    output = subprocess.check_output(('head', '-n', '1'), stdin=grep.stdout)   
     ps.wait()
+    grep.wait()
     pid = output.decode('utf-8').split()[1]
     print ('pid: %s' % pid) 
     subprocess.call(['kill', '-s', 'USR2', pid])
