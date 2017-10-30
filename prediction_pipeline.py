@@ -117,7 +117,7 @@ def predict_label(text_strings, vocab, max_len, model):
     return hh
 
 
-def predict(itemid, title, desc):
+def predict(itemid, title, desc, probability=False):
     # print "predict:",  title
     # title_and_desc = title + " " + desc
     title_and_desc = title
@@ -153,8 +153,10 @@ def predict(itemid, title, desc):
             #    'sub_cat': df_cat[df_cat['level3_cat']==level_3_preds[i][0]]['sub_cat'].values[0],
             #    'level3_cat': level_3_preds[i][0],
             # })
-            # preds.append({'cat': int(level_3_preds[i][0]), 'score': float(level_3_preds[i][1])})
-            preds.append(int(level_3_preds[i][0]))
+            if probability:
+                preds.append({'cat': int(level_3_preds[i][0]), 'score': float(level_3_preds[i][1])})
+            else:
+                preds.append(int(level_3_preds[i][0]))
         return preds
     else:
         return []

@@ -51,7 +51,7 @@ def post_items():
     df_features['tokened_name'] = df_features['name'].apply(tokenization)
     df_features['tokened_description'] = df_features['description'].apply(tokenization) 
     df_features['category_suggestions'] = df_features.apply(
-        lambda row: predict(row['itemid'], row['tokened_name'], row['tokened_description']), axis=1)
+        lambda row: predict(row['itemid'], row['tokened_name'], row['tokened_description'], True), axis=1)
 
     df_results = df_features[['itemid', 'shopid', 'category_suggestions']]
     # print('time elapsed: %s' % (time.time() - start_time))

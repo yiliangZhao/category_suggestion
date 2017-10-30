@@ -18,5 +18,5 @@ if __name__ == '__main__':
     response = requests.post(url, data=json.dumps({"items": list_items[:int(sys.argv[1])]}), headers=headers)
     # response = requests.post(url, data=json.dumps(data), headers=headers)
     result = response.json
-    # print (response.status_code, response.json())
+    print (response.status_code, response.json())
     print('time elapsed: %s' % (time.time() - start_time))
