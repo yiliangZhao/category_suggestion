@@ -21,7 +21,7 @@ curl "http://203.116.23.21:5001/category/v1.1/items?itemid=556324&shopid=67000"
 def hello_world():
     return "Hello World!"
 
-@app.route('/category/v1.1/item', methods=['GET'])
+@app.route('/category-suggest/v1.1/item', methods=['GET'])
 def get_items():
     start_time = time.time()
     itemname = tokenization(request.args.get('title'))
