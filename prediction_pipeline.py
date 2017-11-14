@@ -15,7 +15,7 @@ import os
 CAT_MAPPING_PATH='./models/cat_mapping.csv'
 FASTTEXT_MODEL_PATH='./models/fasttext_model.bin'
 CNN_MODEL_PATH='./models/model_saved/'
-THRESHOLD = 0.0
+THRESHOLD = 0.3
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # see issue #152
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
