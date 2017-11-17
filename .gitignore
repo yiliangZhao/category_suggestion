@@ -1,6 +1,7 @@
 # tem_list
 # project specifics
 fastText/
+logs
 
 # for deep learning models
 models/

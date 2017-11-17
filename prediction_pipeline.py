@@ -1,4 +1,7 @@
 #coding: utf-8
+import os
+import logging
+import logging.config
 import numpy as np
 import pandas as pd
 import fasttext
@@ -9,7 +12,6 @@ import tensorflow as tf
 import keras
 import pickle
 from keras.models import load_model
-import os
 
 
 CAT_MAPPING_PATH='./models/cat_mapping.csv'
@@ -21,6 +23,8 @@ os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  # see issue #152
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 df_cat = pd.read_csv(CAT_MAPPING_PATH)
 
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger('webApp')
 
 def in_top2(y_tue, y_pred):
     return top_k_categorical_accuracy(y_tue, y_pred, k=2)
@@ -127,6 +131,8 @@ def predict(itemid, title, desc, probability=False):
         print ('itemid: %d, name_description: %s'% (itemid, title_and_desc))
         print ('###' + clean_text_strings[0] + '###')
         return []
+    
+    logger.info('Predict for item (title: %s)' % title)
     # level 1 prediction
     level_1_preds = fasttext_model.predict_proba([title_and_desc], k=3)
     level_1_preds = [(int(label.replace('__label__','')), prob) for label, prob in level_1_preds[0]]
