@@ -29,6 +29,42 @@ def get_items():
     status = 200
     return jsonify(results), status
 
+@app.route('/category-suggestion/v1.2/item', methods=['GET']) 
+# For UAT
+def get_items_UAT():
+    start_time = time.time()
+    itemname = request.args.get('title')
+    data_response = {
+        'samsung galaxy s7': [13904, 13908, 13918],
+        'samsung galaxy s7 new': [13904, 13908, 13918],
+        'google pixel 2': [13926, 13928],
+        'google pixel 2 plus': [7002, 7014],
+        'test': [] 
+    }
+    if itemname not in data_response:
+        return [], 500
+    
+    status = 200
+    return jsonify(data_response[itemname]), status
+
+@app.route('/category-suggestion/v1.3/item', methods=['GET']) 
+# For test
+def get_items_test():
+    start_time = time.time()
+    itemname = request.args.get('title')
+    data_response = {
+        'samsung galaxy s7': [13904, 13908, 13918],
+        'samsung galaxy s7 new': [13904, 13908, 13918],
+        'google pixel 2': [13926, 13928],
+        'google pixel 2 plus': [7006, 13890],
+        'test': [] 
+    }
+    if itemname not in data_response:
+        return [], 500
+    
+    status = 200
+    return jsonify(data_response[itemname]), status
+
 
 @app.route('/category/v1.1/list_items', methods=['POST'])
 def post_items():
