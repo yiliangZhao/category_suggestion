@@ -5,6 +5,7 @@ import json
 import pickle
 import numpy
 import requests
+from random import randint
 from feature_extraction import extract_information_bulk, extract_information
 from prediction_pipeline import predict
 from tokenization_local import tokenization
@@ -41,10 +42,13 @@ def get_items_UAT():
         'google pixel 2 plus': [7002, 7014],
         'test': [] 
     }
-    if itemname not in data_response:
+    if itemname == 'qwer':
         return [], 500
     
     status = 200
+    if itemname not in data_response:
+        return jsonify([randint(0, 100), randint(0, 100), randint(0, 100)]), status
+
     return jsonify(data_response[itemname]), status
 
 @app.route('/category-suggestion/v1.3/item', methods=['GET']) 
