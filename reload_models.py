@@ -11,7 +11,7 @@ if __name__ == '__main__':
     print ('pid: %s' % pid) 
     subprocess.call(['kill', '-s', 'USR2', pid])
     time.sleep(600)
-    subprocess.call(['kill', '-s', 'TERM', pid])
+    subprocess.call(['kill', '-9', pid])
     """
     subprocess.call(['kill', '-s', 'TERM', pid])
     time.sleep(10)
